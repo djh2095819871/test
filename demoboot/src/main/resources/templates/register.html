@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册界面</title>
+</head>
+<style>
+
+    .pg_header {
+        position: fixed;
+        height: 48px;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgb(60,176,190);
+        line-height: 48px;
+    }
+
+    .pg_header .logo {
+        margin: 0 auto;
+        float: left;
+        width: 200px;
+        text-align: center;
+        line-height: 48px;
+        font-size: 28px;
+        color: white;
+    }
+
+    .pg_dl {
+        left: 400px;
+        display: inline-block;
+        padding: 0 40px;
+        color: white;
+    }
+
+    .pg_header .pg_dl:hover {
+        background-color: #2459fb;
+        cursor: pointer;
+    }
+
+    .left {
+        margin-top: 20px;
+        width: 400px;
+        display: inline-block;
+        float: left;
+    }
+
+    .pg_body {
+        margin-top: 50px;
+        font-size: 18px;
+        display: inline-block;
+        width: 200px;
+    }
+
+    .pg_body .menu {
+        width: 800px;
+        padding: 15px;
+        float: left;
+        font-weight: bold;
+    }
+
+    input[type="text"] {
+        width: 200px;
+        height: 25px;
+        border-radius: 6px;
+    }
+
+    input[type="password"] {
+        width: 200px;
+        height: 25px;
+        border-radius: 6px;
+    }
+
+    input[type="button"] {
+        background-color: #555555;
+        border: none;
+        color: white;
+        padding: 12px 29px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 17px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    input[type="submit"] {
+        background-color: #555555;
+        border: none;
+        color: white;
+        padding: 12px 29px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 17px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    input[type="reset"] {
+        background-color: #555555;
+        border: none;
+        color: white;
+        padding: 12px 29px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 17px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .kong {
+        margin-top: -54px;
+        margin-left: 200px;
+        float: left;
+        padding: 15px;
+    }
+
+
+
+    .can {
+        width: 1220px;
+        height: 40px;
+        line-height: 40px;
+        margin: 0 auto;
+        text-align: center;
+        display: inline-block;
+    }
+
+
+</style>
+<body th:style="'background-image:url( '+@{img/background.jpg}+');'">
+<div class="pg_header">
+    <a class="logo">欢迎注册</a>
+    <a class="pg_dl" id="i77">帮助</a>
+</div>
+<script th:inline="javascript">
+    const msg=/*[[${session.msg}]]*/{};
+    if (msg!=""){
+        alert(msg);
+    }
+</script>
+
+<form action="/insertuser" th:action="@{/insertuser}" method="post">
+    <div class="left"></div>
+    <div class="pg_body">
+        <div class="menu">学号</div>
+        <div class="kong">
+            <input id="text1" type="text" placeholder="请输入学号" name="number"/>
+        </div>
+        <div class="menu">姓名:</div>
+        <div class="kong">
+            <input id="i2" type="text" placeholder="请输入你的名字" name="name">
+        </div>
+        <div class="menu">性别:</div>
+        <div class="kong" style="width:200px;">
+            男<input type="radio" value="男" name='sex' >
+            女<input type="radio" value="女" name='sex'>
+        </div>
+        <div class="menu">密码:</div>
+        <div class="kong">
+            <input id="text2" type="password" placeholder="请输入密码" name="pwd"/>
+        </div>
+        <div class="menu">确认密码:</div>
+        <div class="kong">
+            <input id="text3" type="password" placeholder="请再次输入密码" />
+
+        </div>
+        <div class="menu">电话号码:</div>
+        <div class="kong">
+            <input id="phone" type="text" placeholder="请输入你的电话" name="phone"/>
+
+        </div>
+        <div class="menu">年龄</div>
+        <div class="kong">
+            <input id='age' type="text" placeholder="请输入你的年龄" name="age">
+        </div>
+    </div>
+    <div class="can">
+        <input id="i111" onclick="return total()" type="submit" value="注  册">
+        <p style="width: 200px;display: inline-block;"></p>
+        <input id="i222" type="reset" value="重  置">
+    </div>
+</form>
+<script type="text/javascript">
+    var flag = true;
+
+    function check_id() {
+        var id_value = document.getElementById("text1").value;
+        if (id_value == '') {
+            window.alert('学号不能为空');
+            flag = false;
+        }
+        if (flag) {
+            if ((id_value >= 0 && id_value <= 9)) {
+                window.alert('学号只能为数字');
+                flag = false;
+            }
+        }
+    }
+
+    function check_name() {
+        var name_value = document.getElementById("i2").value;
+        if (name_value == '') {
+            window.alert('姓名不能为空');
+            flag = false;
+        }
+    }
+
+    function check_pwd() {
+        var pwd_1 = document.getElementById("text2").value;
+        var pwd_2 = document.getElementById("text3").value;
+        if (pwd_1 != pwd_2) {
+            window.alert('两次密码不同，请重新输入');
+            flag = false;
+        } else if (pwd_1.length < 4 || pwd_1.length > 16 && flag) {
+            window.alert('密码太长/太短，请重新输入');
+            flag = false;
+        }
+    }
+
+    function check_phone() {
+        var phone_num = document.getElementById("phone").value.length;
+        if (phone_num != 11) {
+            window.alert('手机号输入有误，请重新输入');
+            flag = false;
+        }
+    }
+
+    function check_age() {
+        var age_num = document.getElementById("age").value;
+        if (age_num == '') {
+            window.alert('请输入你的年龄');
+            flag=false;
+        } else if (age_num < 0 || age_num > 120) {
+            window.alert('年龄输入有误');
+            flag = false;
+        }
+    }
+
+    function total() {
+        flag=true;
+        if (flag) {
+            check_id();
+        }
+        if (flag) {
+            check_name();
+        }
+        if (flag) {
+            check_pwd();
+        }
+        if (flag) {
+            check_phone();
+        }
+        if (flag) {
+            check_age();
+        }
+        if (flag) {
+            return true;
+            window.alert("提交成功");
+        }
+        else{
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

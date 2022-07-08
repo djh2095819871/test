@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+</head>
+<style>
+
+    .pg_header {
+        position: fixed;
+        height: 48px;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgb(60,176,190);
+        line-height: 50px;
+        width: 600px;
+
+    }
+
+    .pg_header .logo {
+        margin: 0 auto;
+        float: left;
+        width: 200px;
+        text-align: center;
+        line-height: 48px;
+        font-size: 28px;
+        color: white;
+    }
+
+    .pg_dl {
+        left: 400px;
+        display: inline-block;
+        padding: 0 40px;
+        color: white;
+    }
+
+    .pg_header .pg_dl:hover {
+        background-color: #2459fb;
+        cursor: pointer;
+    }
+
+
+    .pg_body {
+        margin-top: 50px;
+        font-size: 18px;
+        display: inline-block;
+        width: 200px;
+    }
+
+    .pg_body .menu {
+        width: 500px;
+        padding: 15px;
+        float: left;
+        font-weight: bold;
+    }
+
+    input[type="text"] {
+        width: 200px;
+        height: 25px;
+        border-radius: 6px;
+    }
+
+    input[type="password"] {
+        width: 200px;
+        height: 25px;
+        border-radius: 6px;
+    }
+
+    input[type="button"] {
+        background-color: #555555;
+        border: none;
+        color: white;
+        padding: 12px 29px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 17px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .kong {
+        margin-top: -54px;
+        margin-left: 200px;
+        float: left;
+        padding: 15px;
+    }
+
+    .form{
+        width: 200px;
+        height: 464px;
+    }
+
+</style>
+<body>
+<div class="pg_header">
+    <a class="logo">个人中心</a>
+    <a class="pg_dl" id="i77">帮助</a>
+</div>
+<div class="form">
+    <div class="pg_body">
+        <div class="menu">学号</div>
+        <div class="kong">
+            <input id="text1" type="text" name="number" readonly="readonly" th:value="${ms.number}"/>
+        </div>
+        <div class="menu">姓名:</div>
+        <div class="kong">
+            <input id="i2" type="text" name="name" readonly="readonly" th:value="${ms.name}"/>
+        </div>
+        <div class="menu">性别:</div>
+        <div class="kong" style="width:200px;" th:value="${ms.sex}">男</div>
+        <div class="menu">电话号码:</div>
+        <div class="kong">
+            <input id="phone" type="text" name="phone" readonly="readonly" th:value="${ms.phone}"/>
+        </div>
+        <div class="menu">年龄</div>
+        <div class="kong">
+            <input id='age' type="text" name="age" readonly="readonly" th:value="${ms.age}" />
+        </div>
+    </div>
+
+
+
+</div>
+</body>
+</html>

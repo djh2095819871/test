@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>联系我们</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/banner.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" />
+</head>
+<body>
+
+<div th:replace="~{head::head}"></div>
+<div class="container">
+    <div id="d1-left">
+        <img src="./img/gjh.jpg" height="90px" width="100px">
+        <p>姓名：郭健辉</p>
+        <p2>联系方式：11111111111</p2>
+    </div>
+    <div id="d1">
+        <img src="./img/zzc.jpg" height="90px" width="100px">
+        <p>姓名：章子成</p>
+        <p2>联系方式：11111111111</p2>
+    </div>
+    <div id="d1-left">
+        <img src="./img/xwf.jpg" height="90px" width="100px">
+        <p>姓名：徐文锋</p>
+        <p2>联系方式：11111111111</p2>
+
+    </div>
+
+    <div id="d1">
+        <img src="./img/wrp.jpg" height="90px" width="100px">
+        <p>姓名：王荣鹏</p>
+        <p2>联系方式：11111111111</p2>
+    </div>
+<!--    <div id="d1-left">-->
+<!--        <img src="./img/hjl.jpg" height="90px" width="100px">-->
+<!--        <p>姓名：何佳丽</p>-->
+<!--        <p2>联系方式：11111111111</p2>-->
+<!--    </div>-->
+    <div id="d1">
+        <img src="./img/zxq.jpg" height="90px" width="100px">
+        <p>姓名：曾小庆</p>
+        <p2>联系方式：11111111111</p2>
+    </div>
+</div>
+<br />
+<br />
+<hr />
+<div class="zt">
+    <h1 id="character">关于我们</h1>
+    <br />
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;我们是来自南昌交通学院19计科3-4班，组成了一个6人团队。团队中分工合做，有条不紊，各自完成自己的工作，将工作成果交友组长，由组长进行汇总，最终构成了完整的高校信息管理系统
+        在本次项目中，我们不仅提前完成了任务，还培养了创新意识，创新能力以及自主学习习惯，学会如何去发现去发现问题，思考问题，寻找解决方式。
+    </p>
+    <br />
+    <br />
+</div>
+<div th:replace="~{foot::foot}"></div>
+</body>
+
+<script type="text/javascript">
+    //颜色动态变化
+    var i=0;
+    setInterval('changeColor()',500);
+    function changeColor(){
+        var div=document.getElementById("character"); //获得div元素
+        var colorArr=['#8A2BE2','#DEB887','#7FFF00','#008B8B','#FF1493','rgb(241,93,93)']; //建立颜色库
+        if(i==colorArr.length){
+            i=0;
+        }else{
+            div.style.color=colorArr[i++%colorArr.length]; //循环颜色
+
+        }
+    }
+</script>
+
+</html>

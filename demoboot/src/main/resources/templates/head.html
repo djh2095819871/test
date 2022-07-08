@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="head" th:fragment="head">
+    <div class="top">
+        <p th:if="${session.uinfo==0}" th:text="'欢迎   '+${session.ms.name}+'   登入高校投票系统！'" style="float:left;width: auto;height: 28px;line-height: 28px"></p>
+        <a class="top_but" th:if="${session.uinfo==1}" th:href="@{/dengru}">登入/注册</a>
+        <a class="top_but" th:if="${session.uinfo==0}" th:href="@{/xitong}" th:text="'用户：'+${session.ms.name}"></a>
+    </div>
+    <div class="top_t">
+        <h2>高校投票系统</h2>
+        <span>联系电话：14779723678</span>
+    </div>
+    <div class="dao">
+        <ul>
+            <li class="dao_li"><a th:href="@{/index}">首页</a></li>
+            <li class="dao_li"><a th:href="@{/about}">关于我们</a></li>
+            <li class="dao_li"><a th:href="@{/xitong}">投票系统</a></li>
+            <li class="dao_li"><a href="#">校园资讯</a></li>
+            <li class="dao_li"><a th:href="@{/lianxi}">联系我们</a></li>
+            <li class="dao_li" style="border-right: #ffffff 1px solid;"><a th:href="@{/tuijian}">推荐项目</a></li>
+        </ul>
+    </div>
+    <div class="banner">
+        <ul class="list">
+            <li class="item active"></li>
+            <li class="item"></li>
+            <li class="item"></li>
+        </ul>
+        <ul class="dk">
+            <li class="yk active" data-index="0"></li>
+            <li class="yk" data-index="1"></li>
+            <li class="yk" data-index="2"></li>
+        </ul>
+        <script src="js/banner.js"></script>
+    </div>
+</div>
+</body>
+</html>

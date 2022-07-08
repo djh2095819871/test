@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<style>
+    body{
+        width: 1520px;
+        height: 700px;
+    }
+    #head{
+        width: 900px;
+        height: 600px;
+        margin-top: 100px;
+        border: darkgray 1px solid;
+        opacity:0.80;
+        box-shadow: 10px 10px 5px #888888;
+    }
+    #img{
+        float: left;
+    }
+    #table1{
+        float: right;
+    }
+    #but{
+        position: absolute;
+        margin-left: -200px;
+        margin-top: 30px;
+        font-size: 20px;
+        width: 25%;
+        height: 8%;
+    }
+    .button{
+        margin-left: 25px;
+        margin-top: 8px;
+        border-radius:1em;
+        width: 100px;
+        padding:8px;
+        background-color: #428bca;
+        border-color: #357ebd;
+        color: #fff;
+        border-radius: 10px;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        font-weight: 900;
+        font-size:125%
+
+    }
+    .biao{
+        width: 100%;
+        height: 200px;
+        float: left;
+        margin: 10% 50%;
+    }
+</style>
+<body>
+<div id="head">
+    <div id="img">
+        <img th:src="${session.oneinfo.img}" width="280" height="265"/>
+    </div>
+    <div id="table1">
+        <table cellpadding="17">
+            <tr>
+                <td>项目名称:</td>
+                <td th:text="${session.oneinfo.pname}">wdawadsd</td>
+            </tr>
+            <tr>
+                <td >项目类型:</td>
+                <td th:text="${session.oneinfo.category.cname}">wdasdwa</td>
+            </tr>
+            <tr>
+                <td>项目详情:</td>
+                <td th:text="${session.oneinfo.remarks}">wdasdwa</td>
+            </tr>
+            <tr>
+                <td>项目说明:</td>
+                <td th:text="${session.oneinfo.description}">wdasdwa</td>
+            </tr>
+            <tr>
+                <td>项目备注:</td>
+                <td th:text="${session.oneinfo.detail}">wdasdwa</td>
+            </tr>
+            <tr th:if="${session.piao}">
+                <td>投票总数:</td>
+                <td th:text="${session.oneinfo.count}">wdasdwa</td>
+            </tr>
+        </table>
+    </div>
+    <div class="biao">
+        <form id="but" th:action="@{${#strings.append('onepiao?pid=',session.oneinfo.pid)}}" method="post">
+            <button th:if="!${session.piao}" type="submit" class="button">投票</button>
+            <button th:if="${session.piao}" type="submit" class="button" disabled>已投票</button>
+            <a th:href="@{tuijian}"><button type="button" class="button">离开</button></a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

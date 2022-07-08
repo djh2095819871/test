@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demoboot.mapper.vote_InfoMapper">
+    <select id="findall" resultMap="result">
+        select pid,pname,remarks,c.cid as cid,cname,detail,count,pdate,img from vote_category c,vote_info v
+        where c.cid=v.cid
+    </select>
+    <resultMap id="result" type="vote_Info">
+        <id column="pid" property="pid"></id>
+        <result column="pname" property="pname"></result>
+        <result column="remarks" property="remarks"></result>
+        <result column="detail" property="detail"></result>
+        <result column="count" property="count"></result>
+        <result column="pdate" property="pdate"></result>
+        <result column="img" property="img"></result>
+        <association property="category" column="cid" javaType="Category">
+            <id column="cid" property="cid"></id>
+            <result column="cname" property="cname"></result>
+        </association>
+    </resultMap>
+
+    <select id="findallsort" resultMap="result3">
+        select pid,pname,remarks,c.cid as cid,cname,detail,count,pdate,img from vote_category c,vote_info v
+        where c.cid=v.cid order by count desc
+    </select>
+    <resultMap id="result3" type="vote_Info">
+        <id column="pid" property="pid"></id>
+        <result column="pname" property="pname"></result>
+        <result column="remarks" property="remarks"></result>
+        <result column="detail" property="detail"></result>
+        <result column="count" property="count"></result>
+        <result column="pdate" property="pdate"></result>
+        <result column="img" property="img"></result>
+        <association property="category" column="cid" javaType="Category">
+            <id column="cid" property="cid"></id>
+            <result column="cname" property="cname"></result>
+        </association>
+    </resultMap>
+
+    <select id="findBypid" parameterType="int" resultMap="result2">
+        select pid,pname,remarks,c.cid as cid,cname,detail,count,pdate,description,img from vote_category c,vote_info v
+        where c.cid=v.cid and pid=#{pid}
+    </select>
+    <resultMap id="result2" type="vote_Info">
+        <id column="pid" property="pid"></id>
+        <result column="pname" property="pname"></result>
+        <result column="remarks" property="remarks"></result>
+        <result column="detail" property="detail"></result>
+        <result column="count" property="count"></result>
+        <result column="pdate" property="pdate"></result>
+        <result column="description" property="description"></result>
+        <result column="img" property="img"></result>
+        <association property="category" column="cid" javaType="Category">
+            <id column="cid" property="cid"></id>
+            <result column="cname" property="cname"></result>
+        </association>
+    </resultMap>
+<!--SELECT name, COUNT(*) FROM   employee_tbl GROUP BY name;-->
+
+
+    <insert id="savevote_Info" parameterType="vote_Info">
+        insert into vote_info(pname,cid,remarks,pdate,detail,description,img) values(#{pname},#{category.cid},#{remarks},#{pdate},#{detail},#{description},#{img})
+    </insert>
+
+    <delete id="deletevote_Info" parameterType="int">
+        delete from vote_info where pid=#{pid}
+    </delete>
+
+    <update id="updatevote_Info" parameterType="vote_Info">
+        update vote_info set pname=#{pname},cid=#{category.cid},remarks=#{remarks},count=#{count},detail=#{detail},description=#{description} where pid=#{pid}
+    </update>
+
+</mapper>

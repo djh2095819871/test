@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>高校投票系统</title>
+		<link rel="stylesheet" type="text/css" th:href="@{css/index.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{css/banner.css}" />
+	</head>
+	<body>
+	<script th:inline="javascript">
+		const msg=/*[[${session.msg}]]*/{};
+		if (msg!=''){
+			alert(msg);
+		}
+	</script>
+		<div th:replace="~{head::head}"></div>
+	<div id="main">
+		<div class="about">
+			<span>关于我们</span>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们是来自南昌交通学院19计科3-4班，组成了一个6人团队。团队中分工合做，有条不紊，各自完成自己的工作
+				将工作成果交友组长，由组长进行汇总，最终构成了完整的高校信息管理系统,在本次项目中，我们不仅提前完成了任务，还培养了创新意识，创新能力以及自主学习习惯，学会如何去发现去发现问题，思考问题，寻找解决方式。
+				感谢北京万邦易嵌科技有限公司给我们提供了这次实训机会，在本次实训安排下，我们严格实施企业化软件编程规范
+				强化程序设计之需求理解能力、代码测试习惯以及文档编写习惯
+				了解并体验企业工作环境和工作方式；
+				培养职业素质、团队合作精神及沟通能力，体验企业文化，适应未来的工作环境
+				我们只是一个小团队，还在逐渐成长中。我们以后会做出更多，更好的项目
+				为用户提供便利，给社会带来价值
+				加油，未来可期！</p>
+		</div>
+	</div>
+	<div id="main2">
+		<span>热门项目</span>
+		<div class="remen">
+			<div id="out">
+				<marquee style="width: 60%;height:200px;margin:0px 20%" onmouseout="this.start();"
+						 onmouseover="this.stop();" scrollAmount=10 loop=-1 direction="left" scrolldelay="50"
+						 truespeed="truespeed" behavior="scroll">
+					<!--/*@thymesVar id="vote_infos" type="com.example.demoboot.entity.vote_Info"*/-->
+					<div class="roll" >
+						<a th:each="infos:${vote_infos}" th:href="@{${#strings.append('toupiao?pid=',infos.pid)}}"><img th:src="${infos.img}" /></a>
+					</div>
+				</marquee>
+			</div>
+			<div id="ckgd"><a th:href="@{/tuijian}">
+				<ul>
+					<li>查看更多</li>
+				</ul></a></div>
+		</div>
+	</div>
+	<div id="main3">
+		<div class="tuijian">
+			<span>推荐项目</span>
+			<!--/*@thymesVar id="vote_infolist" type="com.example.demoboot.entity.vote_Info"*/-->
+			<ul >
+				<li th:each="info:${vote_infolist}">
+				<a th:href="@{${#strings.append('toupiao?pid=',info.pid)}}" th:text="${info.pname}">TOP1:项目标题</a><dd th:text="${#strings.replace(info.pdate,'T',' ')}">2021-10-5<dd></li>
+			</ul>
+		</div>
+		<div class="zixun">
+			<span>校园资讯</span>
+			<ul>
+				<li>
+					<a href="#">一条新闻</a>
+					<dd >2021-10-5<dd>
+				</li>
+				<li>
+					<a href="#">一条新闻</a>
+					<dd >2021-10-5<dd>
+				</li>
+				<li>
+					<a href="#">一条新闻</a>
+					<dd >2021-10-5<dd>
+				</li>
+				<li>
+					<a href="#">一条新闻</a>
+					<dd >2021-10-5<dd>
+				</li>
+				<li>
+					<a href="#">一条新闻</a>
+					<dd >2021-10-5<dd>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div th:replace="~{foot::foot}"></div>
+	</body>
+</html>
+

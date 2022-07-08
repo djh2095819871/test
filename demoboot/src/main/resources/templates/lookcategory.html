@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <script th:src="@{js/echarts.min.js}"></script>
+    <title></title>
+</head>
+<style>
+    #head{
+        float: left;
+    }
+    #mian{
+        float: right;
+    }
+</style>
+<body>
+<div id="head">
+    <table>
+        <tr>
+            <td>分类名称</td>
+            <td>项目总数</td>
+        </tr>
+        <!--/*@thymesVar id="categorylook" type="com.example.demoboot.entity.categorylook"*/-->
+        <tr th:each="infos:${clcategory}">
+            <td th:text="${infos.cname}"></td>
+            <td th:text="${infos.count}"></td>
+        </tr>
+    </table>
+</div>
+<div id="mian" style="width:500px; height: 300px;"></div>
+<script type="text/javascript" th:inline="javascript">
+    var categorylook=[[${clcategory}]];
+    var cname=[];
+    var names=[];
+
+    for(var i=0;i<categorylook.length;i++){
+        var obj= {};
+        cname.push(categorylook[i].cname);
+        obj.value=categorylook[i].count;
+        obj.name=categorylook[i].cname;
+        names.push(obj);
+
+    }
+    var myehc=echarts.init(document.getElementById("mian"));
+    var option={
+        title: {
+            text: "项目统计",
+            x: "center"
+        },
+        tooltip: {
+            trigger: "item",
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: "vertical",
+            x: "left",
+            data:cname
+        },
+        calculable: true,
+        series: [
+            {
+                name: "访问来源",
+                type: "pie",
+                radius: "55%",
+                center: ["50%", "60%"],
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true,
+                            formatter: "{b}: {c} ({d}%)"
+                        }
+                    }
+                },
+                data:names
+            }
+        ]
+    }
+    myehc.setOption(option);
+</script>
+</body>
+</html>

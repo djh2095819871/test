@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demoboot.mapper.vote_UserMapper">
+    <select id="findall" resultType="vote_User">
+        select * from user
+    </select>
+
+    <select id="findBynum" resultType="vote_User">
+        select * from user where number=#{number}
+    </select>
+
+    <insert id="insertUser" parameterType="vote_User">
+        insert into user(number ,pwd,name,sex,phone) values (#{number},#{pwd},#{name},#{sex},#{phone})
+    </insert>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from user where number=#{number}
+    </delete>
+
+    <update id="updateUser" parameterType="vote_User">
+        update user set number=#{number},pwd=#{pwd},name=#{name},sex=#{sex},phone=#{phone},role=#{role} where number=#{number}
+    </update>
+
+</mapper>

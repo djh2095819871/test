@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>投票后台</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" th:href="@{images/favicon.ico}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- 引入css -->
+    <link rel="stylesheet" th:href="@{css/plugins/font-awesome-4.7.0/css/font-awesome.min.css}"  media="all">
+    <link rel="stylesheet" th:href="@{lib/layui-v2.3.0/css/layui.css}"  media="all">
+    <link rel="stylesheet" th:href="@{css/main.css}"  media="all">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!-- 导航栏 -->
+    <div class="layui-header">
+        <a href="#" class="layui-logo">
+            <span class="layui-logo-mini"></span>
+            <span class="layui-logo-lg">系统后台</span>
+        </a>
+        <a class="side-toggle layui-layout-left" href="#">
+            <i class="layui-icon layui-icon-shrink-right"></i>
+            <i class="layui-icon layui-icon-spread-left"></i>
+        </a>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item timo-search">
+                <input class="timo-search-input" type="search" placeholder="搜索">
+                <button class="timo-search-button"><i class="fa fa-search"></i></button>
+            </li>
+            <li class="layui-nav-item">
+                <a href="#">
+                    <i class="fa fa-bell-o fa-lg"></i>
+                </a>
+            </li>
+            <li class="layui-nav-item">
+                <a class="timo-screen-full" href="#">
+                    <i class="fa layui-icon layui-icon-screen-full"></i>
+                </a>
+            </li>
+            <li class="layui-nav-item timo-nav-user">
+                <a class="timo-header-nickname">用户数据<span class="layui-nav-more"></span></a>
+                <div class="layui-nav-child layui-anim layui-anim-upbit">
+                    <div class="timo-nav-child-box">
+                        <div><!--/*@thymesVar id="number" type="com.example.demoboot.entity.vote_User"*/-->
+                        <!--/*@thymesVar id="number" type="com.example.demoboot.entity.vote_User"*/-->
+                        <a class="open-popup" data-title="个人信息" data-size="600,600" th:attr="data-url=${#strings.append('onexinxi?number=',session.ms.number)}" >
+              <i class="fa fa-user-o"></i>个人信息</a></div>
+                        <div><a th:href="@{index}"><i class="fa fa-power-off"></i>回到首页</a></div>
+                        <div><a class="open-popup" data-title="修改密码" data-size="900,600" th:attr="data-url='nopassword'">
+              <i class="fa fa-lock" style="font-size:17px;width:12px;"></i>修改密码</a></div>
+                        <div><a th:href="@{/}"><i class="fa fa-power-off"></i>退出登入</a></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <div class="layui-side-user">
+                <img class="layui-side-user-avatar" th:src="@{images/user-picture.jpg}" alt="头像">
+                <div th:switch="${session.ms.role}">
+                    <!--/*@thymesVar id="name" type="com.example.demoboot.entity.vote_User"*/-->
+                    <p class="layui-side-user-name" th:text="${session.ms.name}">小懒虫</p>
+                    <p class="layui-side-user-designation"  th:case="2">超级管理员</p>
+                    <p class="layui-side-user-designation"  th:case="1">管理员</p>
+                    <p class="layui-side-user-designation"  th:case="0">普通用户</p>
+                </div>
+            </div>
+            <!-- 导航区域 -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="layui-nav-side">
+                <li class="layui-nav-item layui-this">
+                    <a href="javascript:;" lay-url="home.html" lay-icon="true"><i class="layui-icon layui-icon-home"></i><span class="layui-nav-title">个人中心</span></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" lay-url="#"><i class="fa fa-cog"></i><span class="layui-nav-title">项目管理</span><span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" lay-url="votepro"><span class="layui-nav-title">项目管理</span></a></dd>
+                        <dd><a href="javascript:;" lay-url="toupiaopro"><span class="layui-nav-title">已投票项目</span></a></dd>
+                        <dd><a href="javascript:;" lay-url="notoupiaopro"><span class="layui-nav-title">未投票项目</span></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" lay-url="#"><i class="fa fa-cog"></i><span class="layui-nav-title">分类管理</span><span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child" th:each="category:${session.categories}">
+                        <dd ><a href="javascript:;" th:attr="lay-url=${#strings.append('categorypro?cid=',category.cid)}"><span class="layui-nav-title" th:text="${category.cname}">分类名称</span></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" th:if="${session.ms.role}==2">
+                    <a href="javascript:;" lay-url="#"><i class="fa fa-cog"></i><span class="layui-nav-title">角色管理</span><span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" lay-url="userpro"><span class="layui-nav-title">角色管理</span></a></dd>
+                    </dl>
+                </li>
+                <span class="layui-nav-bar"></span></ul>
+        </div>
+    </div>
+    <!-- 主体区域 -->
+    <div class="layui-body layui-tab layui-tab-brief" lay-allowclose="true" lay-filter="iframe-tabs">
+        <!-- 标签栏 -->
+        <ul class="layui-tab-title"><li lay-id="home.html" class="layui-this"><i class="layui-icon layui-icon-home"></i><span class="layui-nav-title">主页</span><i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li></ul>
+        <!-- 内容区域 -->
+        <div class="layui-tab-content"><div class="layui-tab-item layui-show"><iframe th:src="@{home}" frameborder="0" class="layui-layout-iframe"></iframe></div></div>
+    </div>
+</div>
+<script th:src="@{lib/layui-v2.3.0/layui.js}" charset="utf-8"></script>
+<script th:src="@{js/main.js}" charset="utf-8"></script>
+</body></html>

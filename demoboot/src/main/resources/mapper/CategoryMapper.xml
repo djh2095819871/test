@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demoboot.mapper.CategoryMapper">
+    <select id="findall" resultType="Category">
+        select * from vote_category
+    </select>
+    <select id="findBycid" parameterType="int" resultType="Category">
+        select * from vote_category where cid=#{cid}
+    </select>
+    <insert id="saveCategory" parameterType="Category">
+        insert into vote_category(cname) values(#{cname})
+    </insert>
+    <delete id="deleteCategory" parameterType="int">
+        delete from vote_category where cid=#{cid}
+    </delete>
+    <update id="update" parameterType="Category">
+        update vote_category set cname=#{cname} where cid=#{cid}
+    </update>
+
+</mapper>

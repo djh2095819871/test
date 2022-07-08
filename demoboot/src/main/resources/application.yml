@@ -1,0 +1,19 @@
+server:
+  port: 9999
+spring:
+  datasource:
+    password: 2095819871
+    username: root
+    url: jdbc:mysql://localhost:3306/vote
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: true
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.example.demoboot.entity
+###文件上传
+file:
+  ###静态资源对外暴露的访问路径
+  staticAccessPath: /upload/**
+  ###静态资源实际存储路径
+  uploadFolder: D:\\ideaboot\demoboot\src\main\image

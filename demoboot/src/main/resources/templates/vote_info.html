@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/pinsert"  th:action="@{/pinsert}" method="post">
+    名字：<input type="text" name="pname"/> <br/>
+    分类：<select name="category.cid" >
+    <option th:each="category :${categories}" th:text="${category.cname}" th:value="${category.cid}"></option>
+</select>
+    备注:<input type="text" name="remarks"><br/>
+    详情:<input type="text" name="detail"><br/>
+    图片:<input type="text" name="img"><br/>
+    <button type="submit">增加项目</button>
+    <button type="reset">重置</button>
+</form>
+</body>
+</html>

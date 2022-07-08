@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>项目推荐</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/banner.css}" />
+    <style>
+        #container{
+            width:calc(100%);
+        }
+        #center{
+            height:auto;
+
+        }
+        #zj{
+            width:70%;
+            height:auto;
+            margin: auto;
+            margin-top: 30px;
+        }
+        #font{
+
+        }
+        .font1{
+            margin-top:-1px;
+            text-align: center;
+            font-family: 微软雅黑;
+            font-size: medium;
+            font-weight: bolder;
+            font-size: x-large;
+
+        }
+        .font2{
+            font-size:25px;
+            color: darkorange;
+            text-align: center;
+            font-family: Candara;
+            font-weight: bolder;
+
+        }
+        #xiao{
+            height:498px;
+            width: 100%;
+            margin: auto;
+        }
+        #xiao ul li{
+            float: left;
+            margin-left: 30px;
+            margin-top:25px;
+            list-style: none;
+            text-align: center;
+            box-shadow:4px 4px 5px #999;
+
+        }
+        #xiao ul li a{
+            display: block;
+            height: 50px;
+            line-height:50px;
+            text-decoration:none;
+            background: #ffffff;
+            font-size: small;
+            color: black;
+        }
+        .first{
+            height:220px;
+            width:200px;
+            background: white;
+
+        }
+
+        #xiao a:hover{
+            color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{head::head}"></div>
+<div id="container">
+    <div id="center">
+        <div id="zj">
+            <div id="font">
+                <p class="font1">推荐项目</p>
+                <p class="font2">Recommendation</p>
+            </div>
+
+            <div id="xiao">
+                <ul >
+                    <li class="first" th:each="infos:${vote_infos}">
+                        <img th:src="${infos.img}"  width="200" height="160"/>
+                        <a th:href="@{${#strings.append('toupiao?pid=',infos.pid)}}"  th:text="${infos.pname}">项目名称</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{foot::foot}"></div>
+</body>
+</html>
